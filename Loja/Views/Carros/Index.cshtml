@@ -1,0 +1,81 @@
+﻿@model IEnumerable<Loja.Models.Carro>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Carros</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-sm btn-success"> <i class="bi bi-person-plus"></i>Novo Carro</a>
+</p>
+
+<form asp-controller="Carros" asp-action="Index">
+    <p>
+        Marca: <input type="text" name="searchString" />
+        <input type="submit" value="Filtrar" />
+    </p>
+
+
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Modelo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Marca)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ano)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Preco)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsNovo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estoque)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Url)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Modelo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Marca)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ano)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Preco)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsNovo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estoque)
+            </td>
+             <td>
+                <img src="@Url.Content("~/img/" + @item.Url)" alt="@item.Url" height="100px" />
+             </td>
+            <td>
+                    <a asp-action="Edit" asp-route-id="@item.CarroId" class="btn btn-sm btn-info"> <i class="bi bi-journal-text"></i>Editar</a> |
+                    <a asp-action="Details" asp-route-id="@item.CarroId" class="btn btn-sm btn-primary"> <i class="bi bi-pencil"></i>Detalhes</a> |
+                    <a asp-action="Delete" asp-route-id="@item.CarroId" class="btn btn-sm btn-danger"> <i class="bi bi-trash3"></i>Excluir</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
